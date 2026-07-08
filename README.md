@@ -56,19 +56,19 @@ The framework is built around five principles.
 
 Modular
 
-Every repository can operate independently or become part of the Terminal.
+### Every repository can operate independently or become part of the Terminal.
 
 Real-Time
 
-No cloud dependency.
+### No cloud dependency.
 
 Everything processes locally whenever possible.
 
-Open Source
+### Open Source
 
 Designed for experimentation, learning, and community collaboration.
 
-Cross Platform
+### Cross Platform
 
 ESP32
 
