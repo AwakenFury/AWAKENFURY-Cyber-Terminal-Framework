@@ -12,7 +12,7 @@
 </p>
 
 
-AWAKENFURY Cyber Terminal Framework
+## AWAKENFURY Cyber Terminal Framework
 
 The unified command center for the Cyber-Bio ecosystem.
 One terminal. One interface. Every sensor. Every experiment.
