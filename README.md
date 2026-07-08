@@ -15,7 +15,6 @@
 AWAKENFURY Cyber Terminal Framework
 
 The unified command center for the Cyber-Bio ecosystem.
-
 One terminal. One interface. Every sensor. Every experiment.
 
 Overview
@@ -50,7 +49,8 @@ Cyber-Bio       Spatial AI        Network Security
  Hall Sensors             CSI Analysis
  Radar
  Motion
-Core Philosophy
+
+### Core Philosophy
 
 The framework is built around five principles.
 
@@ -95,65 +95,65 @@ Human-machine interface research using bioelectric sensors.
 
 Current research includes:
 
-EMG
-ECG
-GSR
-Biofeedback
-Neural interface concepts
-Physiological visualization
-Experimental wearable technologies
-Spatial Intelligence Framework
+ - EMG
+ - ECG
+ - GSR
+ - Biofeedback
+ - Neural interface concepts
+ - Physiological visualization
+ - Experimental wearable technologies
+ - Spatial Intelligence Framework
 
 Environmental perception platform.
 
 Combines:
 
-mmWave radar
-ultrasonic sensing
-IMU
-magnetometers
-distance estimation
-motion tracking
-environmental awareness
-Cyber Security Toolkit
+ - mmWave radar
+ - Ultrasonic sensing
+ - IMU
+ - Magnetometers
+ - Distance estimation
+ - Motion tracking
+ - Environmental awareness
+ - Cyber Security Toolkit
 
 Wireless awareness and monitoring platform.
 
 Includes:
 
-WiFi scanning
-BLE discovery
-Bluetooth analysis
-RSSI visualization
-ESP32 monitoring dashboards
-network telemetry
-embedded security research
-Hardware Hub
+ - WiFi scanning
+ - BLE discovery
+ - Bluetooth analysis
+ - RSSI visualization
+ - ESP32 monitoring dashboards
+ - network telemetry
+ - embedded security research
+ - Hardware Hub
 
 Rapid prototyping environment.
 
 Supports:
 
-ESP32 family
-Arduino
-Raspberry Pi
-custom PCBs
-OLED displays
-TFT interfaces
-wearable electronics
-AI Visualization
+ - ESP32 family
+ - Arduino
+ - Raspberry Pi
+ - custom PCBs
+ - OLED displays
+ - TFT interfaces
+ - wearable electronics
+ - AI Visualization
 
 Future work focuses on presenting sensor information through intuitive visual interfaces.
 
 Potential capabilities include:
 
-sensor fusion
-predictive alerts
-anomaly detection
-environmental mapping
-digital twin visualization
-interactive dashboards
-Terminal Architecture
+ - sensor fusion
+ - predictive alerts
+ - anomaly detection
+ - environmental mapping
+ - digital twin visualization
+ - interactive dashboards
+ - Terminal Architecture
                      USER
                       │
                 Cyber Terminal
@@ -175,19 +175,21 @@ Terminal Architecture
       │              │                  │
  ESP32         Arduino        Browser Interface
  Sensors       Raspberry Pi   Remote Display
+
 Long-Term Goals
-Unified desktop application
-Portable cyber deck interface
-Multi-display support
-Real-time sensor fusion
-Biofeedback visualization
-Embedded AI assistants
-Modular plugin architecture
-3D environmental mapping
-Open hardware compatibility
-Cross-platform deployment
-Repository Structure
-Cyber-Terminal/
+ - Unified desktop application
+ - Portable cyber deck interface
+ - Multi-display support
+ - Real-time sensor fusion
+ - Biofeedback visualization
+ - Embedded AI assistants
+ - Modular plugin architecture
+ - 3D environmental mapping
+ - Open hardware compatibility
+ - Cross-platform deployment
+ - Repository Structure
+ - Cyber-Terminal/
+
 │
 ├── docs/
 ├── firmware/
@@ -210,11 +212,11 @@ Design Inspiration
 
 The interface draws inspiration from:
 
-Cyberpunk command consoles
-Science-fiction research laboratories
-Aerospace mission control systems
-Industrial automation dashboards
-Portable field engineering workstations
+ - Cyberpunk command consoles
+ - Science-fiction research laboratories
+ - Aerospace mission control systems
+ - Industrial automation dashboards
+ - Portable field engineering workstations
 
 The objective is to blend cinematic design with practical engineering, creating an interface that is both visually compelling and useful for real-time experimentation.
 
@@ -226,13 +228,13 @@ The Cyber Terminal Framework is an active research and development project inten
 
 Features, hardware compatibility, and system architecture will continue to evolve as new modules are developed.
 
-Contributing
+### Contributing
 
 Contributions are welcome from developers, hardware makers, designers, and researchers interested in embedded systems, sensor integration, visualization, and human-machine interfaces.
 
 Whether you're improving firmware, designing dashboards, building hardware modules, or refining documentation, your ideas and contributions are encouraged.
 
-Project Motto
+### Project Motto
 
 "One Terminal. Every Sensor. Infinite Possibilities."
 
