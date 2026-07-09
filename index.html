@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAKENFURY // Cyber Terminal Framework</title>
+    <style>
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #003311;
+            --bg-black: #050b07;
+            --panel-bg: rgba(5, 20, 10, 0.85);
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: var(--font-stack);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 10px;
+            text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+        }
+
+        /* Scanline Overlay effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        header {
+            border: 1px solid var(--neon-green);
+            padding: 10px;
+            margin-bottom: 10px;
+            background: var(--panel-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-unit h1 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .status-tag {
+            background: var(--dark-green);
+            padding: 3px 8px;
+            font-size: 0.85rem;
+            border-radius: 3px;
+            animation: blink 2s infinite;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 1fr;
+            gap: 10px;
+            flex: 1;
+            min-height: 0; /* Important for inner scrolling */
+            margin-bottom: 10px;
+        }
+
+        .panel {
+            border: 1px solid var(--neon-green);
+            background: var(--panel-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            min-height: 0;
+        }
+
+        .panel-header {
+            border-bottom: 1px dashed var(--neon-green);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-content {
+            overflow-y: auto;
+            flex: 1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Custom Scrollbar */
+        .scroll-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            border-left: 2px solid var(--neon-green);
+            padding-left: 6px;
+        }
+
+        .log-entry.fail {
+            color: #ff3333;
+            text-shadow: 0 0 4px rgba(255, 51, 51, 0.6);
+            border-left-color: #ff3333;
+        }
+
+        /* Console Interface */
+        .console-panel {
+            height: 180px;
+            border: 1px solid var(--neon-green);
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .console-history {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .input-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .prompt {
+            margin-right: 8px;
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .console-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            font-family: var(--font-stack);
+            font-size: 0.9rem;
+            outline: none;
+            text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="title-unit">
+            <h1>AWAKENFURY // CYBER-TERMINAL-FRAMEWORK</h1>
+        </div>
+        <div class="status-tag">CORE_STATUS: ACTIVE</div>
+    </header>
+
+    <div class="dashboard">
+        <!-- Left Panel: Diagnostics -->
+        <div class="panel">
+            <div class="panel-header">> SYSTEM_METRICS</div>
+            <div class="scroll-content">
+                <div class="stat-row"><span>CPU FREQUENCY:</span> <span>4.8 GHz</span></div>
+                <div class="stat-row"><span>MEMORY LOAD:</span> <span>34% / 64GB</span></div>
+                <div class="stat-row"><span>NET FLOOD:</span> <span>0.00b / s</span></div>
+                <div class="stat-row"><span>PROXY CHAIN:</span> <span>STABLE (3 NODES)</span></div>
+                <div class="stat-row"><span>CIPHER KEY:</span> <span>AES-256-GCM</span></div>
+                <br>
+                <p style="color: #88ff88;">[+] Framework loaded successfully.</p>
+                <p style="color: #88ff88;">[+] Ready to execute offensive modules.</p>
+            </div>
+        </div>
+
+        <!-- Right Panel: Main Engine Log Output -->
+        <div class="panel">
+            <div class="panel-header">> LIVE_FRAMEWORK_FEED</div>
+            <div class="scroll-content" id="liveFeed">
+                <div class="log-entry">[21:38:01] INITIALIZING AWAKENFURY ENGINE...</div>
+                <div class="log-entry">[21:38:02] PARSING EXPLOIT SCHEMATICS... SUCCESS.</div>
+                <div class="log-entry fail">[21:38:04] ALERT: ATTEMPTING HANDSHAKE OVERRIDE ON NODE-7... TIMEOUT.</div>
+                <div class="log-entry">[21:38:05] ROUTING TRAFFIC VIA BACKUP VPN TUNNEL... ENCRYPTED.</div>
+                <div class="log-entry">[21:38:06] LISTENING FOR INCOMING WEBHOOK CONNECTIONS...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Panel: Command Terminal -->
+    <div class="console-panel">
+        <div class="console-history" id="history">
+            <div>AWAKENFURY Cyber Terminal v1.0.0 Ready. Type 'help' for custom commands.</div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">af-terminal_></span>
+            <input type="text" class="console-input" id="terminalInput" autofocus autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <script>
+        const terminalInput = document.getElementById('terminalInput');
+        const history = document.getElementById('history');
+        const liveFeed = document.getElementById('liveFeed');
+
+        // Commands handler mapping
+        const commands = {
+            'help': () => 'Available framework directives:<br>- status : Show framework integrity<br>- attack : Execute demo vector simulation<br>- clear  : Wipe console timeline<br>- exit   : Detach core interface',
+            'status': () => '[OK] AWAKENFURY Module Core Engine running cleanly.<br>[OK] Storage integrity 100%. No memory leaks flagged.',
+            'attack': () => {
+                // Dynamically feed information into the live output block
+                setTimeout(() => createLog("BURSTING TARGET PORTS... SUCCESS", false), 500);
+                setTimeout(() => createLog("EXTRACTING ROOT HASHKEYS...", false), 1200);
+                return '⚡ Initiating rapid thread multi-vector deployment process... Check LIVE_FRAMEWORK_FEED above.';
+            },
+            'clear': () => {
+                history.innerHTML = '';
+                return '';
+            }
+        };
+
+        function createLog(text, isFail) {
+            const now = new Date().toTimeString().split(' ')[0];
+            const div = document.createElement('div');
+            div.className = isFail ? 'log-entry fail' : 'log-entry';
+            div.innerHTML = `[${now}] ${text}`;
+            liveFeed.appendChild(div);
+            liveFeed.scrollTop = liveFeed.scrollHeight;
+        }
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const inputVal = this.value.trim();
+                if (!inputVal) return;
+
+                // Echo typed input
+                const userEcho = document.createElement('div');
+                userEcho.innerHTML = `<span style="color: #fff;">af-terminal_> ${inputVal}</span>`;
+                history.appendChild(userEcho);
+
+                // Run validation matching command hooks
+                const normalizedCmd = inputVal.toLowerCase();
+                if (commands[normalizedCmd]) {
+                    const output = commands[normalizedCmd]();
+                    if (output) {
+                        const responseDiv = document.createElement('div');
+                        responseDiv.innerHTML = output;
+                        history.appendChild(responseDiv);
+                    }
+                } else {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.innerHTML = `<span style="color: #ff3333;">'${inputVal}' is unrecognized by AWAKENFURY subsystem. Try 'help'.</span>`;
+                    history.appendChild(errorDiv);
+                }
+
+                this.value = '';
+                history.scrollTop = history.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAKENFURY // Cyber Terminal Framework</title>
+    <style>
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #003311;
+            --bg-black: #050b07;
+            --panel-bg: rgba(5, 20, 10, 0.85);
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: var(--font-stack);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 10px;
+            text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+        }
+
+        /* Scanline Overlay effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        header {
+            border: 1px solid var(--neon-green);
+            padding: 10px;
+            margin-bottom: 10px;
+            background: var(--panel-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-unit h1 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .status-tag {
+            background: var(--dark-green);
+            padding: 3px 8px;
+            font-size: 0.85rem;
+            border-radius: 3px;
+            animation: blink 2s infinite;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 1fr;
+            gap: 10px;
+            flex: 1;
+            min-height: 0; /* Important for inner scrolling */
+            margin-bottom: 10px;
+        }
+
+        .panel {
+            border: 1px solid var(--neon-green);
+            background: var(--panel-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            min-height: 0;
+        }
+
+        .panel-header {
+            border-bottom: 1px dashed var(--neon-green);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-content {
+            overflow-y: auto;
+            flex: 1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Custom Scrollbar */
+        .scroll-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            border-left: 2px solid var(--neon-green);
+            padding-left: 6px;
+        }
+
+        .log-entry.fail {
+            color: #ff3333;
+            text-shadow: 0 0 4px rgba(255, 51, 51, 0.6);
+            border-left-color: #ff3333;
+        }
+
+        /* Console Interface */
+        .console-panel {
+            height: 180px;
+            border: 1px solid var(--neon-green);
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .console-history {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .input-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .prompt {
+            margin-right: 8px;
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .console-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            font-family: var(--font-stack);
+            font-size: 0.9rem;
+            outline: none;
+            text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="title-unit">
+            <h1>AWAKENFURY // CYBER-TERMINAL-FRAMEWORK</h1>
+        </div>
+        <div class="status-tag">CORE_STATUS: ACTIVE</div>
+    </header>
+
+    <div class="dashboard">
+        <!-- Left Panel: Diagnostics -->
+        <div class="panel">
+            <div class="panel-header">> SYSTEM_METRICS</div>
+            <div class="scroll-content">
+                <div class="stat-row"><span>CPU FREQUENCY:</span> <span>4.8 GHz</span></div>
+                <div class="stat-row"><span>MEMORY LOAD:</span> <span>34% / 64GB</span></div>
+                <div class="stat-row"><span>NET FLOOD:</span> <span>0.00b / s</span></div>
+                <div class="stat-row"><span>PROXY CHAIN:</span> <span>STABLE (3 NODES)</span></div>
+                <div class="stat-row"><span>CIPHER KEY:</span> <span>AES-256-GCM</span></div>
+                <br>
+                <p style="color: #88ff88;">[+] Framework loaded successfully.</p>
+                <p style="color: #88ff88;">[+] Ready to execute offensive modules.</p>
+            </div>
+        </div>
+
+        <!-- Right Panel: Main Engine Log Output -->
+        <div class="panel">
+            <div class="panel-header">> LIVE_FRAMEWORK_FEED</div>
+            <div class="scroll-content" id="liveFeed">
+                <div class="log-entry">[21:38:01] INITIALIZING AWAKENFURY ENGINE...</div>
+                <div class="log-entry">[21:38:02] PARSING EXPLOIT SCHEMATICS... SUCCESS.</div>
+                <div class="log-entry fail">[21:38:04] ALERT: ATTEMPTING HANDSHAKE OVERRIDE ON NODE-7... TIMEOUT.</div>
+                <div class="log-entry">[21:38:05] ROUTING TRAFFIC VIA BACKUP VPN TUNNEL... ENCRYPTED.</div>
+                <div class="log-entry">[21:38:06] LISTENING FOR INCOMING WEBHOOK CONNECTIONS...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Panel: Command Terminal -->
+    <div class="console-panel">
+        <div class="console-history" id="history">
+            <div>AWAKENFURY Cyber Terminal v1.0.0 Ready. Type 'help' for custom commands.</div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">af-terminal_></span>
+            <input type="text" class="console-input" id="terminalInput" autofocus autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <script>
+        const terminalInput = document.getElementById('terminalInput');
+        const history = document.getElementById('history');
+        const liveFeed = document.getElementById('liveFeed');
+
+        // Commands handler mapping
+        const commands = {
+            'help': () => 'Available framework directives:<br>- status : Show framework integrity<br>- attack : Execute demo vector simulation<br>- clear  : Wipe console timeline<br>- exit   : Detach core interface',
+            'status': () => '[OK] AWAKENFURY Module Core Engine running cleanly.<br>[OK] Storage integrity 100%. No memory leaks flagged.',
+            'attack': () => {
+                // Dynamically feed information into the live output block
+                setTimeout(() => createLog("BURSTING TARGET PORTS... SUCCESS", false), 500);
+                setTimeout(() => createLog("EXTRACTING ROOT HASHKEYS...", false), 1200);
+                return '⚡ Initiating rapid thread multi-vector deployment process... Check LIVE_FRAMEWORK_FEED above.';
+            },
+            'clear': () => {
+                history.innerHTML = '';
+                return '';
+            }
+        };
+
+        function createLog(text, isFail) {
+            const now = new Date().toTimeString().split(' ')[0];
+            const div = document.createElement('div');
+            div.className = isFail ? 'log-entry fail' : 'log-entry';
+            div.innerHTML = `[${now}] ${text}`;
+            liveFeed.appendChild(div);
+            liveFeed.scrollTop = liveFeed.scrollHeight;
+        }
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const inputVal = this.value.trim();
+                if (!inputVal) return;
+
+                // Echo typed input
+                const userEcho = document.createElement('div');
+                userEcho.innerHTML = `<span style="color: #fff;">af-terminal_> ${inputVal}</span>`;
+                history.appendChild(userEcho);
+
+                // Run validation matching command hooks
+                const normalizedCmd = inputVal.toLowerCase();
+                if (commands[normalizedCmd]) {
+                    const output = commands[normalizedCmd]();
+                    if (output) {
+                        const responseDiv = document.createElement('div');
+                        responseDiv.innerHTML = output;
+                        history.appendChild(responseDiv);
+                    }
+                } else {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.innerHTML = `<span style="color: #ff3333;">'${inputVal}' is unrecognized by AWAKENFURY subsystem. Try 'help'.</span>`;
+                    history.appendChild(errorDiv);
+                }
+
+                this.value = '';
+                history.scrollTop = history.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
